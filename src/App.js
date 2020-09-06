@@ -1,69 +1,38 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-function Food({ name, image, rating }) {
-  return (
-    <div>
-      <h1> {name}은(는) 맛있다</h1>
-      <h3>★{rating} / 5.0</h3>
-      <img src={image} alt={name} />
-    </div>
-  );
-}
+class App extends React.Component {
+  state = {
+    count: 0,
+  };
+  add = () => {
+    this.setState((current) => ({ count: current.count + 1 }));
+  };
+  minus = () => {
+    this.setState({
+      count: this.state.count - 1,
+    });
+  };
+  componentDidMount() {
+    console.log("Component rendered");
+  }
+  componentDidUpdate() {
+    console.log("I just updated");
+  }
+  componentWillUnmount() {
+    console.log("Goodbye, cruel world");
+  }
+  render() {
+    console.log("I'm rendering");
 
-Food.propTypes = {
-  name: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-  rating: PropTypes.number.isRequired,
-};
-
-const foodILike = [
-  {
-    id: 1,
-    name: "Kimchi",
-    image:
-      "http://aeriskitchen.com/wp-content/uploads/2008/09/kimchi_bokkeumbap_02-.jpg",
-    rating: 3,
-  },
-  {
-    id: 2,
-    name: "Samgyeopsal",
-    image:
-      "https://3.bp.blogspot.com/-hKwIBxIVcQw/WfsewX3fhJI/AAAAAAAAALk/yHxnxFXcfx4ZKSfHS_RQNKjw3bAC03AnACLcBGAs/s400/DSC07624.jpg",
-    rating: 4.5,
-  },
-  {
-    id: 3,
-    name: "Bibimbap",
-    image:
-      "http://cdn-image.myrecipes.com/sites/default/files/styles/4_3_horizontal_-_1200x900/public/image/recipes/ck/12/03/bibimbop-ck-x.jpg?itok=RoXlp6Xb",
-    rating: 2.8,
-  },
-  {
-    id: 4,
-    name: "Doncasu",
-    image:
-      "https://s3-media3.fl.yelpcdn.com/bphoto/7F9eTTQ_yxaWIRytAu5feA/ls.jpg",
-    rating: 5,
-  },
-  {
-    id: 5,
-    name: "Kimbap",
-    image:
-      "http://cdn2.koreanbapsang.com/wp-content/uploads/2012/05/DSC_1238r-e1454170512295.jpg",
-    rating: 3,
-  },
-];
-
-function App() {
-  const { id, name, image } = foodILike;
-  return (
-    <div>
-      {foodILike.map(({ id, name, image, rating }) => (
-        <Food key={id} name={name} image={image} rating={rating} />
-      ))}
-    </div>
-  );
+    return (
+      <div>
+        <h1>숫자: {this.state.count}</h1>
+        <button onClick={this.add}>더하기</button>
+        <button onClick={this.minus}>빼기</button>
+      </div>
+    );
+  }
 }
 
 export default App;
